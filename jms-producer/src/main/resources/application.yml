@@ -1,0 +1,35 @@
+server:
+  port: 7902
+spring:
+  application:
+    name: service-jms-consumer
+  activemq:
+    broker-url: tcp://127.0.0.1:61616
+    user: admin
+    password: admin
+    pool:
+      enabled: true
+      max-connections: 100
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:root@localhost:7900/eureka/
+  instance:
+      lease-renewal-interval-in-seconds: 1
+      lease-expiration-duration-in-seconds: 1
+      hostname: localhost
+      prefer-ip-address: true
+      status-page-url: /actuator/info
+      health-check-url-path: /actuator/health
+      metadata-map:
+        user.name: root
+        user.password: root
+      instance-id: service-jms-consumer
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
